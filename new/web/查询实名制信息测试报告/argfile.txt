@@ -1,0 +1,10 @@
+--outputdir
+c:\users\administrator\appdata\local\temp\RIDEv1r6rj.d
+--monitorcolors
+off
+--monitorwidth
+95
+--suite
+开户业务
+--test
+开户业务.查询客户实名制信息

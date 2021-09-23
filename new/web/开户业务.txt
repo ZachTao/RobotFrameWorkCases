@@ -1,0 +1,407 @@
+*** Settings ***
+Documentation     西藏南基5期新CRM项目WEB自动化
+Suite Setup       Sleep    1sec    #启动之前休息1秒
+Library           Selenium2Library
+Resource          resourse.txt
+
+*** Test Cases ***
+普通GSM开户-4G飞享套餐开户
+    打开浏览器&进入CRM主页
+    #进入普通GSM开户主页面
+    selectFrame    //*[@id="navframe_def"]    #进入IFrame
+    click element    //*[@id="menu_ct"]    #进入菜单
+    sleep    2
+    click element    //*[@id="menu_l1_ul"]/li[2]    #进入个人业务主页
+    sleep    2
+    unselectFrame
+    sleep    2
+    selectFrame    //*[@id="navframe_def"]
+    click element    //*[@id="menu_l2_2"]
+    sleep    2
+    click element    //*[@id="menu_l2_2"]/div/div[4]/ul/li[3]
+    sleep    2
+    unselectFrame
+    客户信息采集
+    新增账户
+    选择号码-手动输入然后选占
+    选择套餐-4G飞享套餐138元档
+    选SIM卡
+    click element    //*[@id="IS_BUSI_DATA_CARD_span"]    #行业数据卡
+    sleep    1
+    click element    //*[@id="IS_BUSI_DATA_CARD_float"]/div[2]/div/div/ul/li[2]    #否
+    sleep    2
+    input text    //*[@id="NEW_PASSWORD"]    199703    #密码
+    input text    //*[@id="CONFIRM_NEW_PASSWORD"]    199703
+    click button    //*[@id="CSSUBMIT_BUTTON"]
+    sleep    5
+    算费&提交订单
+    closebrowser
+
+普通GSM开户-不限量套餐开户
+    打开浏览器&进入CRM主页
+    进入普通GSM开户主页面
+    客户信息采集
+    新增账户
+    #选择号码-手动输入然后选占
+    select frame    //*[@id="navframe_58"]
+    input text    //*[@id="NEW_ACCESS_NUM"]    17889115260
+    click button    //*[@id="querInputNumButton"]
+    sleep    3
+    click element    //*[@id="resNumPopItem_numList"]/div/div/table/tbody/tr/td[1]
+    click button    //*[@id="resNumPopItem_SearchArea"]/div/button[1]
+    sleep    2
+    click button    //*[@id="wade_messagebox-9e195ea111bb546550abfb6a30a9d746_btns"]/button
+    sleep    1
+    comment    商品套餐选择大神卡套餐
+    click element    //*[@id="OPEN_OFFER_VIEW_LI"]
+    sleep    3
+    input text    //*[@id="searchOfferkeyWord"]    111089150147
+    click button    //*[@id="searchOffersearchButton"]
+    sleep    5
+    select frame    //*[@id="offerFrame"]
+    click element    //*[@id="offerName_111089150147"]
+    sleep    10
+    select frame    //*[@id="iframe1"]
+    click button    //*[@id="OFFER_BUTTON_SUBMIT"]
+    sleep    5
+    unselectframe
+    #选SIM卡
+    selectFrame    //*[@id="navframe_58"]
+    click element    //*[@id="ICC_ID"]
+    sleep    3
+    input text    //*[@id="resSimPopItem_ICC_ID_S"]    89860061250378986609
+    click button    //*[@id="resSimPopItem_SearchArea"]/div/button[2]
+    sleep    5
+    click element    //*[@id="resSimPopItem_simUl"]/li[1]
+    sleep    3
+    click button    //*[@id="resSimPopItem_SearchArea"]/div/button[1]
+    sleep    3
+    click button    //*[@id="wade_messagebox-4c0f5558543cefb1761534ad07f668fe_btns"]/button
+    sleep    3
+    行业数据卡
+    设置密码
+    算费&提交订单
+    closebrowser
+
+批量USIM卡开户
+    打开浏览器&进入CRM主页
+    进入个人业务主页
+    click element    //*[@id="menu_l2_2"]/div/div[4]/ul/li[13]    #进入批量开户主页
+    sleep    5
+    unselectframe
+    select frame    //*[@id="navframe_58"]
+    click element    //*[@id="busiNameValue_span"]
+    click element    //*[@id="busiNameValue_float"]/div[2]/div/div/ul/li[4]
+    sleep    1
+    click element    //*[@id="pageParam"]/div[4]/ul/li/div[2]/span/span[4]
+    sleep    20    #弹出文本上传框，上传步骤后续需单独写脚本处理
+    input text    //*[@id="remindNumber"]    15300001111
+    click element    //*[@id="bookingDate"]
+    sleep    2
+    click element    //*[@id="calendar1"]/div[7]/button[2]
+    sleep    2
+    clickelement    //*[@id="calendar1"]/div[6]/ul/li[5]
+    sleep    1
+    inputtext    //*[@id="fileRemark"]    临时USIM卡批量开户
+    click button    //*[@id="submitButton"]/button
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}    #打印订单
+    closebrowser
+
+查询客户实名制信息
+    打开浏览器&进入CRM主页
+    进入个人业务主页
+    click element    //*[@id="menu_l2_2"]/div/div[14]/ul/li[41]
+    unselectframe
+    sleep    1
+    select frame    //*[@id="navframe_58"]
+    click element    //*[@id="qryBox"]
+    inputtext    //*[@id="cond_access_num"]    15728990732
+    click element    //*[@id="qryButton"]
+    sleep    5
+    clickelement    //*[@id="realNames4Admin"]/div/div/table/tbody/tr/td[2]
+    sleep    1
+    click button    //*[@id="viewBtn"]
+    ${a}    gettext    //*[@id="realNameInfo_EXT2"]
+    log    ${a}
+    run keyword If    '${a}'=='${null}'    log    未实名制认证    ELSE    log    已实名制认证
+    sleep    2
+    close browser
+
+商品变更-程控退订
+    打开浏览器&进入CRM主页
+    服务号码登录
+    sleep    5
+    进入个人业务主页
+    click element    //*[@id="menu_ct"]/div/div[4]/div/div[6]/ul/li[8]    #进入商品变更页面
+    sleep    10
+    unselectframe
+    select frame    //*[@id="navframe_69"]
+    click element    //*[@id="mainOfferIns_span"]
+    click element    //*[@id="mainOfferIns_float"]/div[2]/div/div/ul/li[2]/div
+    sleep    5
+    unselectframe
+    select frame    //*[@id="navframe_73"]
+    click element    //*[@id="compOfferId_121030501301_710001102979"]
+    sleep    2
+    click element    //*[@id="CSPAY_BUTTON"]
+    sleep    5
+    unselectframe
+    select frame    //*[@id="navframe_74"]
+    click button    //*[@id="CSSUBMIT_BUTTON"]
+    sleep    3
+    click button    //*[@id="sofeeconfirmButton"]    #算费提交，生成订单
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}
+    closebrowser
+
+个人停机
+    打开浏览器&进入CRM主页
+    服务号码登录
+    sleep    5
+    进入个人业务主页
+    click element    //*[@id="menu_ct"]/div/div[4]/div/div[8]/ul/li[1]    #进入个人停机页面
+    sleep    10
+    unselectframe
+    select frame    //*[@id="navframe_69"]
+    sleep    3
+    click element    //*[@class="link required"]
+    sleep    5
+    selectframe    //*[@id="frame_ba5d332bec956f908c7366a7e62f8d05"]
+    click element    //*[@businame="申请停机"]
+    sleep    10
+    click button    //*[@ontap="setGroup(this)"]
+    sleep    5
+    unselect frame
+    select frame    //*[@id="navframe_69"]
+    click button    //*[@id="CSSUBMIT_BUTTON"]
+    sleep    10
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}    #打印订单
+    closebrowser
+
+个人开机
+    打开浏览器&进入CRM主页
+    服务号码登录
+    sleep    5
+    进入个人业务主页
+    click element    //*[@id="menu_ct"]/div/div[4]/div/div[8]/ul/li[2]    #进入个人开机页面
+    sleep    10
+    unselectframe
+    select frame    //*[@id="navframe_69"]
+    sleep    3
+    click element    //*[@class="link required"]
+    sleep    5
+    selectframe    //*[@id="frame_5cc2b289c9d8ccadf11195652adb899d"]
+    click element    //*[@businame="申请复机"]
+    sleep    10
+    click button    //*[@ontap="setGroup(this)"]
+    sleep    5
+    unselect frame
+    select frame    //*[@id="navframe_69"]
+    click button    //*[@id="CSSUBMIT_BUTTON"]
+    sleep    10
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}    #打印订单
+    closebrowser
+
+商品订购
+    打开浏览器&进入CRM主页
+    服务号码登录
+    进入个人业务主页
+    click element    //*[@id="menu_ct"]/div/div[4]/div/div[6]/ul/li[7]    #进入商品订购主页
+    sleep    10
+    unselect frame
+    selectframe    //*[@id="navframe_69"]
+    sleep    5
+    click element    //*[@id="CategoryPart_tab_li_2"]
+    sleep    3
+    click element    //*[@id="offerId_111308042028"]
+    sleep    5
+    unselectframe
+    select frame    //*[@id="navframe_73"]
+    click button    //*[@id="CSPAY_BUTTON"]
+    sleep    5
+    unselect frame
+    select frame    //*[@id="navframe_74"]
+    click button    //*[@id="CSSUBMIT_BUTTON"]
+    sleep    3
+    click element    //*[@id="sofeeconfirmButton"]
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}
+    closebrowser
+
+套餐变更
+    打开浏览器&进入CRM主页
+    服务号码登录
+    进入个人业务主页
+    click element    //*[@id="menu_ct"]/div/div[4]/div/div[6]/ul/li[5]    #进入套餐变更主页
+    sleep    10
+    unselect frame
+    select frame    //*[@id="navframe_69"]
+    sleep    1
+    click element    //*[@ontap="showOfferSelect();"]
+    sleep    3
+    select frame    //*[@id="offerFrame"]
+    sleep    1
+    click element    //*[@id="li100200000009"]
+    sleep    3
+    click element    //*[@id="offerId_111089150004"]
+    sleep    10
+    select frame    //*[@id="iframe1"]
+    sleep    1
+    click button    //*[@id="OFFER_BUTTON_SUBMIT"]
+    sleep    5
+    unselect frame
+    selectframe    //*[@id="navframe_69"]
+    sleep    1
+    click button    //*[@id="CSSUBMIT_BUTTON"]
+    sleep    2
+    click button    //*[@id="sofeeconfirmButton"]
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}    #打印订单
+    closebrowser
+
+营业销户
+    comment    case不包括外围一体机部分，为其他证件开户号码销户，跳过了客户信息鉴定
+    打开浏览器&进入CRM主页
+    click element    //*[@id="m_fn_ul"]/li[2]
+    click element    //*[@id="NO_PASSWORD_LOGIN_CHECKBOX"]    #勾选无密码登录
+    input text    //*[@id="LOGIN_NUM"]    15289109206
+    click button    //*[@id="LOGIN_BTN"]
+    sleep    10
+    selectFrame    //*[@id="navframe_def"]    #进入IFrame
+    click element    //*[@id="menu_ct"]    #进入菜单
+    sleep    2
+    click element    //*[@id="menu_l1_ul"]/li[2]    #进入个人业务主页
+    sleep    2
+    unselect frame
+    select frame    //*[@id="navframe_def"]
+    click element    //*[@id="menu_l2_2"]/div/div[4]/ul/li[10]
+    unselect frame
+    selectframe    //*[@id="navframe_69"]
+    sleep    5
+    input text    //*[@id="REMOVE_REASON"]    测试号码销户
+    click button    //*[@id="CSSUBMIT_BUTTON"]
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}
+    closebrowser
+
+普通GSM开户-一体机实名制采集
+    打开浏览器&进入CRM主页
+    进入普通GSM开户主页面
+    comment    #客户信息采集--一体机
+    selectFrame    //*[@id="navframe_58"]
+    sleep    2
+    click element    //*[@id="CUST_INFO_DIV"]
+    sleep    1
+    click button    //*[@id="allInOneVerifyButton"]
+    click button    //*[@id="sendVerifyButton"]    #下发采集工单
+    sleep    20
+    click button    //*[@id="getVerifyReturnButton"]    #读取采集的信息
+    sleep    5
+    click element    //*[@id="IDEN_NR_BUTTON"]
+    sleep    10
+    click element    //*[@id="wade_messagebox-0c6454e5541fd2705b4e445ea719edd4_btns"]/button
+    sleep    5
+    click button    //*[@id="wade_messagebox-073d36c481e07ea6917f4f04b18ef41c_btns"]/button
+    sleep    5
+    click button    //*[@id="submitButton"]
+    sleep    5
+    新增账户
+    选择号码-手动输入然后选占
+    选择套餐-4G飞享套餐138元档
+    选SIM卡
+    行业数据卡
+    设置密码
+    算费&提交订单
+
+个人批量开户
+    打开浏览器&进入CRM主页
+    进入个人业务主页
+    click element    //*[@id="menu_l2_2"]/div/div[4]/ul/li[13]    #进入批量开户主页
+    sleep    5
+    unselectframe
+    select frame    //*[@id="navframe_58"]
+    click element    //*[@id="busiNameValue_span"]
+    click element    //*[@id="busiNameValue_float"]/div[2]/div/div/ul/li[2]
+    sleep    1
+    click element    //*[@id="pageParam"]/div[4]/ul/li/div[2]/span/span[4]
+    sleep    20    #弹出文本上传框，上传步骤后续需单独写脚本处理
+    input text    //*[@id="remindNumber"]    15300001111
+    click element    //*[@id="bookingDate"]
+    sleep    2
+    click element    //*[@id="calendar1"]/div[4]/ul/li[29]/span
+    inputtext    //*[@id="fileRemark"]    个人批量开户
+    unselectframe
+    #客户信息采集    #这里FRAME要改下    //*[@id="busiPageFrameId"]
+    selectFrame    //*[@id="navframe_58"]
+    sleep    2
+    select frame    //*[@id="busiPageFrameId"]
+    sleep    2
+    click element    //*[@id="CUST_INFO_DIV"]
+    sleep    2
+    click element    //*[@id="editInfoButton"]    #手工输入
+    sleep    2
+    click element    //*[@id="IDEN_TYPE_CODE_span"]    #证件下拉框选择
+    clickelement    //*[@id="IDEN_TYPE_CODE_float"]/div[2]/div[1]/div[1]/ul/li[8]    #证件类型选择护照
+    sleep    10
+    input text    //*[@id="PARTY_NAME"]    淘淘淘啊
+    input text    //*[@id="IDEN_NR"]    335280223711
+    input text    //*[@id="IDEN_ADDRESS"]    中国湖南省长沙市
+    click element    //*[@id="NATION_span"]
+    click element    //*[@id="NATION_float"]/div[2]/div/div/ul/li[2]    #选择名族汉
+    click element    //*[@id="IDEN_EFF_DATE"]    #证件签发时间
+    click element    //*[@id="chooseIdenEffDate"]/div[2]/div[1]/div[1]/div[3]    #这里直接点击的方式操作日历组件
+    click element    //*[@id="chooseIdenEffDate"]/div[2]/div[1]/div[2]/div/ul/li[4]
+    click element    //*[@id="chooseIdenEffDate"]/div[2]/div[1]/div[2]/div[2]/ul/li[6]
+    click element    //*[@id="chooseIdenEffDate"]/div[2]/div/div[4]/ul/li[19]
+    click element    //*[@id="IDEN_EXP_DATE"]    #证件失效时间
+    #assign id to element    #//*[@id="chooseIdenExpDate"]    #time
+    #execute javascript    #window.document.getElementById('time').value='2020-06-18'
+    click element    //*[@id="chooseIdenExpDate"]/div[2]/div[1]/div[1]/div[3]
+    click element    //*[@id="chooseIdenExpDate"]/div[2]/div[1]/div[2]/div/ul/li[8]
+    click element    //*[@id="chooseIdenExpDate"]/div[2]/div[1]/div[2]/div[2]/ul/li[6]
+    click element    //*[@id="chooseIdenExpDate"]/div[2]/div/div[4]/ul/li[17]
+    click element    //*[@id="BIRTH_DATE"]    #填写出生日期
+    click element    //*[@id="chooseBirthDate"]/div[2]/div[1]/div[1]/div[3]
+    click element    //*[@id="chooseBirthDate"]/div[2]/div/div[2]/div/span[1]    #滑动时间轴
+    click element    //*[@id="chooseBirthDate"]/div[2]/div/div[2]/div/span[1]    #滑动时间轴
+    click element    //*[@id="chooseBirthDate"]/div[2]/div[1]/div[2]/div/ul/li[1]
+    click element    //*[@id="chooseBirthDate"]/div[2]/div[1]/div[2]/div[2]/ul/li[6]
+    click element    //*[@id="chooseBirthDate"]/div[2]/div/div[4]/ul/li[18]
+    sleep    3
+    click button    //*[@id="IDEN_NR_BUTTON"]    #校验证件
+    sleep    10
+    click element    //*[@id="wade_messagebox-cf81e10c866725347ff4a1fd78550473_btns"]/button
+    sleep    5
+    click button    //*[@id="wade_messagebox-073d36c481e07ea6917f4f04b18ef41c_btns"]/button
+    sleep    5
+    click button    //*[@id="submitButton"]
+    sleep    5
+    click button    //*[@id="wade_messagebox-d2bf43f6358a35225e5692740dcd9adc_btns"]/button
+    新增账户
+    选择套餐-4G飞享套餐138元档
+    click element    //*[@id="AGGENGT_INFO_LI"]    #采集经办人信息
+    sleep    3
+    click element \    //*[@id="AggentInfoPart_editInfoButton"]
+    inputtext    //*[@id="AggentInfoPart_NAME"]    卡斯特罗
+    inputtext    //*[@id="AggentInfoPart_ID_NUM"]    11010119900307563X
+    inputtext    //*[@id="AggentInfoPart_ADDR"]    中国湖南省长沙市
+    inputtext    //*[@id="AggentInfoPart_PHONE"]    15300001111
+    sleep    1
+    click button    //*[@id="submitAggentInfo"]
+    sleep    10
+    input text    //*[@id="NEW_PASSWORD"]    199703
+    input text    //*[@id="CONFIRM_NEW_PASSWORD"]    199703
+    click button    //*[@id="mainFormDiv"]/div[9]/button    #提交
+    Wait Until Page Contains Element    //*[@id="flowId"]    40    error
+    ${a}    gettext    //*[@id="flowId"]
+    log    ${a}    #打印订单

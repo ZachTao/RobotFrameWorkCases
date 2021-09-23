@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20181027 21:19:19.448" generator="Robot 2.8.5 (Python 2.7.14 on win32)">
+<suite source="F:\知识准备\测试\RobotFramework测试用例\Teamo Z\new\web\开户业务.txt" id="s1" name="开户业务">
+<kw type="setup" name="BuiltIn.Sleep">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1sec</arg>
+</arguments>
+<msg timestamp="20181027 21:19:20.600" level="INFO">Slept 1 second</msg>
+<status status="PASS" endtime="20181027 21:19:20.600" starttime="20181027 21:19:19.599"></status>
+</kw>
+<test id="s1-t1" name="营业销户">
+<kw type="kw" name="BuiltIn.Comment">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>case不包括外围一体机部分，为其他证件开户号码销户，跳过了客户信息鉴定</arg>
+</arguments>
+<status status="PASS" endtime="20181027 21:19:20.604" starttime="20181027 21:19:20.603"></status>
+</kw>
+<kw type="kw" name="resourse.打开浏览器&amp;进入CRM主页">
+<doc></doc>
+<arguments>
+</arguments>
+<kw type="kw" name="Selenium2Library.Open Browser">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://172.16.79.15:8826/crmweb/?service=page/Login</arg>
+<arg>firefox</arg>
+</arguments>
+<msg timestamp="20181027 21:19:20.607" level="INFO">Opening browser 'firefox' to base url 'http://172.16.79.15:8826/crmweb/?service=page/Login'</msg>
+<status status="PASS" endtime="20181027 21:19:24.172" starttime="20181027 21:19:20.606"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Input Text">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>OPER_CODE</arg>
+<arg>91110029</arg>
+</arguments>
+<msg timestamp="20181027 21:19:24.176" level="INFO">Typing text '91110029' into text field 'OPER_CODE'</msg>
+<status status="PASS" endtime="20181027 21:19:24.241" starttime="20181027 21:19:24.175"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Input Text">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>PASSWORD</arg>
+<arg>123456</arg>
+</arguments>
+<msg timestamp="20181027 21:19:24.244" level="INFO">Typing text '123456' into text field 'PASSWORD'</msg>
+<status status="PASS" endtime="20181027 21:19:24.278" starttime="20181027 21:19:24.243"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Sleep">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2</arg>
+</arguments>
+<msg timestamp="20181027 21:19:26.281" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" endtime="20181027 21:19:26.282" starttime="20181027 21:19:24.280"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Button">
+<doc>Clicks a button identified by `locator`.</doc>
+<arguments>
+<arg>login_btn</arg>
+</arguments>
+<msg timestamp="20181027 21:19:26.284" level="INFO">Clicking button 'login_btn'.</msg>
+<status status="PASS" endtime="20181027 21:19:26.530" starttime="20181027 21:19:26.283"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Sleep">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3</arg>
+</arguments>
+<msg timestamp="20181027 21:19:29.535" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20181027 21:19:29.537" starttime="20181027 21:19:26.533"></status>
+</kw>
+<status status="PASS" endtime="20181027 21:19:29.538" starttime="20181027 21:19:20.605"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Element">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="m_fn_ul"]/li[2]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:29.541" level="INFO">Clicking element '//*[@id="m_fn_ul"]/li[2]'.</msg>
+<status status="PASS" endtime="20181027 21:19:29.789" starttime="20181027 21:19:29.540"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Element">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="NO_PASSWORD_LOGIN_CHECKBOX"]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:29.794" level="INFO">Clicking element '//*[@id="NO_PASSWORD_LOGIN_CHECKBOX"]'.</msg>
+<status status="PASS" endtime="20181027 21:19:30.026" starttime="20181027 21:19:29.792"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Input Text">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="LOGIN_NUM"]</arg>
+<arg>17889113623</arg>
+</arguments>
+<msg timestamp="20181027 21:19:30.028" level="INFO">Typing text '17889113623' into text field '//*[@id="LOGIN_NUM"]'</msg>
+<status status="PASS" endtime="20181027 21:19:30.069" starttime="20181027 21:19:30.027"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Button">
+<doc>Clicks a button identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="LOGIN_BTN"]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:30.072" level="INFO">Clicking button '//*[@id="LOGIN_BTN"]'.</msg>
+<status status="PASS" endtime="20181027 21:19:30.309" starttime="20181027 21:19:30.070"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Sleep">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>10</arg>
+</arguments>
+<msg timestamp="20181027 21:19:40.311" level="INFO">Slept 10 seconds</msg>
+<status status="PASS" endtime="20181027 21:19:40.314" starttime="20181027 21:19:30.310"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Select Frame">
+<doc>Sets frame identified by `locator` as current frame.</doc>
+<arguments>
+<arg>//*[@id="navframe_def"]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:40.322" level="INFO">Selecting frame '//*[@id="navframe_def"]'.</msg>
+<status status="PASS" endtime="20181027 21:19:40.347" starttime="20181027 21:19:40.319"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Element">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="menu_ct"]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:40.350" level="INFO">Clicking element '//*[@id="menu_ct"]'.</msg>
+<status status="PASS" endtime="20181027 21:19:41.077" starttime="20181027 21:19:40.349"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Sleep">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2</arg>
+</arguments>
+<msg timestamp="20181027 21:19:43.083" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" endtime="20181027 21:19:43.085" starttime="20181027 21:19:41.080"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Element">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="menu_l1_ul"]/li[2]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:43.089" level="INFO">Clicking element '//*[@id="menu_l1_ul"]/li[2]'.</msg>
+<status status="PASS" endtime="20181027 21:19:43.333" starttime="20181027 21:19:43.087"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Sleep">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2</arg>
+</arguments>
+<msg timestamp="20181027 21:19:45.335" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" endtime="20181027 21:19:45.337" starttime="20181027 21:19:43.334"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Unselect Frame">
+<doc>Sets the top frame as the current frame.</doc>
+<arguments>
+</arguments>
+<status status="PASS" endtime="20181027 21:19:45.354" starttime="20181027 21:19:45.340"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Select Frame">
+<doc>Sets frame identified by `locator` as current frame.</doc>
+<arguments>
+<arg>//*[@id="navframe_def"]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:45.358" level="INFO">Selecting frame '//*[@id="navframe_def"]'.</msg>
+<status status="PASS" endtime="20181027 21:19:45.373" starttime="20181027 21:19:45.356"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Element">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="menu_l2_2"]/div/div[4]/ul/li[9]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:45.375" level="INFO">Clicking element '//*[@id="menu_l2_2"]/div/div[4]/ul/li[9]'.</msg>
+<status status="PASS" endtime="20181027 21:19:45.611" starttime="20181027 21:19:45.374"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Unselect Frame">
+<doc>Sets the top frame as the current frame.</doc>
+<arguments>
+</arguments>
+<status status="PASS" endtime="20181027 21:19:45.622" starttime="20181027 21:19:45.613"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Select Frame">
+<doc>Sets frame identified by `locator` as current frame.</doc>
+<arguments>
+<arg>//*[@id="navframe_69"]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:45.625" level="INFO">Selecting frame '//*[@id="navframe_69"]'.</msg>
+<status status="PASS" endtime="20181027 21:19:45.640" starttime="20181027 21:19:45.623"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Sleep">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<msg timestamp="20181027 21:19:50.642" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" endtime="20181027 21:19:50.645" starttime="20181027 21:19:45.641"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Input Text">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="REMOVE_REASON"]</arg>
+<arg>测试号码销户</arg>
+</arguments>
+<msg timestamp="20181027 21:19:50.650" level="INFO">Typing text '测试号码销户' into text field '//*[@id="REMOVE_REASON"]'</msg>
+<status status="PASS" endtime="20181027 21:19:50.687" starttime="20181027 21:19:50.648"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Click Button">
+<doc>Clicks a button identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="CSSUBMIT_BUTTON"]</arg>
+</arguments>
+<msg timestamp="20181027 21:19:50.690" level="INFO">Clicking button '//*[@id="CSSUBMIT_BUTTON"]'.</msg>
+<status status="PASS" endtime="20181027 21:19:50.928" starttime="20181027 21:19:50.688"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Wait Until Page Contains Element">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>//*[@id="flowId"]</arg>
+<arg>40</arg>
+<arg>error</arg>
+</arguments>
+<status status="PASS" endtime="20181027 21:20:16.483" starttime="20181027 21:19:50.929"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Get Text">
+<doc>Returns the text value of element identified by `locator`.</doc>
+<arguments>
+<arg>//*[@id="flowId"]</arg>
+</arguments>
+<status status="PASS" endtime="20181027 21:20:16.515" starttime="20181027 21:20:16.485"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="PASS" endtime="20181027 21:20:16.515" critical="yes" starttime="20181027 21:19:20.601"></status>
+</test>
+<doc>西藏南基5期新CRM项目WEB自动化</doc>
+<metadata>
+</metadata>
+<status status="PASS" endtime="20181027 21:20:16.516" starttime="20181027 21:19:19.465"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" pass="1" id="s1" name="开户业务">开户业务</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

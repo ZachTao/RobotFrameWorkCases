@@ -1,0 +1,18 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Keywords ***
+upupup
+    [Arguments]    ${cishu}
+    : FOR    ${v}    IN RANGE    ${cishu}
+    \    log    ${v}
+
+查询
+    [Arguments]    ${serch}    ${result}
+    Open Browser    http://www.baidu.com    ie
+    input text    id=kw    ${serch}
+    click element    id=su
+    sleep    2
+    ${title}    get title
+    should contain    ${title}    ${result}
+    close browser

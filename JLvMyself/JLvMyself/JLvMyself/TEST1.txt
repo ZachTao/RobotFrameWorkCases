@@ -1,0 +1,312 @@
+*** Settings ***
+Library           Selenium2Library
+Library           Screenshot
+Library           Collections
+Resource          diermeng.txt
+Resource          forgetAll.txt
+Library           AutoItLibrary
+
+*** Variables ***
+${hi}             欢迎使用robot \ framework
+@{caipiao}        5    1    3    9
+${ddd}            你的梦想是什么？你为此努力了么？
+
+*** Test Cases ***
+lyyang
+    Open Browser    http://192.168.5.222:901    ie
+    @{abc}    create list    a    b    c
+    log many    @{abc}
+    log    i love games
+    sleep    2
+    close browser
+
+iamamen
+    ${we}    set variable    59
+    run keyword if    ${we}>=90    log    优秀    ELSE IF    ${we}>=80    Log
+    ...    良好    ELSE IF    ${we}>=60    log    及格    ELSE
+    ...    log    不及格
+
+for
+    : FOR    ${A}    IN RANGE    10
+    \    log    ${A}
+
+chouyat
+    @{a}    create list    a    c    b    b    f
+    : FOR    ${c}    IN    @{a}
+    \    log    ${c}
+
+wifey
+    @{ad}    create list    a    c    v    b    f
+    : FOR    ${F}    IN    @{ad}
+    \    exit for loop if    '${F}'=='b'
+    \    log    ${F}
+
+newone
+    ${a}    evaluate    random.randint(1000,9999)    random
+    log    ${a}
+
+Screenshot
+    [Tags]    1
+    Take ScreenShot
+
+autoGJZ
+    ${a}    create dictionary    a    1    b    23
+    ${b}    get dictionary items    ${a}
+    log    ${b}
+    ${c}    get dictionary keys    ${a}
+    log    ${c}
+    ${d}    get dictionary values    ${a}
+    log    ${d}
+    ${f}    get from dictionary    ${a}    a
+    log    ${f}
+
+bianliang
+    [Tags]    1
+    log    小明${hi}
+    : FOR    ${H}    IN    @{caipiao}
+    \    log    ${H}
+    循环    20
+    upupup    15
+    查询    蝙蝠侠    蝙蝠侠_百度搜索
+
+open
+    open browser    http://www.baidu.com    ie
+    input text    id=kw    robot framework
+    click button    id=su
+    close browser
+
+deletecookie&reboot
+    open browser    http://www.baidu.com    ie
+    ${title}    get title
+    should contain    ${title}    百度一下，你就知道
+    close browser
+
+forget&reboot
+    open browser    http://www.baidu.com    ie
+    ${text}    get text    id=kw
+    should contain    ${text}    百度一下，你就知道
+    close browser
+
+calculate
+    run    calc.exe
+    wait for active window    计算器
+    control click    计算器    \    button14    #9
+    control click    计算器    \    button21    #*
+    control click    计算器    \    button10    #5
+    control click    计算器    \    button28    #=
+    win close    计算器
+
+页面登陆案例
+    open browser    http://192.168.5.222:901    chrome
+    input_text    //*[@id="tbxUserName-inputEl"]    admin
+    input_text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    close browser
+
+新增用户以及删除用户
+    open browser    http://192.168.5.222:901    ie
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    sleep    1
+    click element    Xpath = //*[@href="/Admin/UserList"]    #打开用户管理页面
+    sleep    1
+    selectFrame    //*[@id="mainTabStrip_fnode1"]/div/iframe
+    sleep    1
+    click element    //*[@id="btnNew"]    #点击【新增用户】
+    unselectFrame
+    sleep    2
+    selectFrame    //*[@id="fineui_9"]/div[2]/iframe
+    用户信息参数    护过饰非    个人    //*[@id="fineui_0-inputEl-icon"]    123456    456@qq.com    789@qq.com
+    ...    789    quhnsfvbweo nb
+    click element    //*[@id="btnSaveClose"]
+    sleep    2
+    unselectFrame
+    sleep    1
+    查询出用户并删除    护过饰非
+
+新增用户管理备份
+    open browser    http://192.168.5.222:901    ie
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    sleep    2
+    click element    Xpath = //*[@href="/Admin/UserList"]    #打开用户管理页面
+    sleep    2
+    selectFrame    //*[@id="mainTabStrip_fnode1"]/div/iframe
+    sleep    2
+    click element    //*[@id="btnNew"]    #点击【新增用户】
+    unselectFrame
+    sleep    2
+    selectFrame    //*[@id="fineui_9"]/div[2]/iframe
+    input text    //*[@id="Name-inputEl"]    杨梅树
+    input text    //*[@id="ChineseName-inputEl"]    惋惜
+    click element    //*[@id="fineui_0-inputEl-icon"]    #xpath=//span[@id='fineui_0-inputEl-icon']/i    #男
+    click element    //*[@id="fineui_1"]    #女
+    click element    //*[@id="Enabled"]/div[2]/div/label
+    input text    //*[@id="Password-inputEl"]    123456
+    input text    //*[@id="Email-inputEl"]    123@qq.com
+    input text    //*[@id="CompanyEmail-inputEl"]    231@qq.com
+    input text    //*[@id="OfficePhone-inputEl"]    1230666
+    input text    //*[@id="Remark-inputEl"]    有多深悔恨
+    click element    //*[@id="btnSaveClose"]
+
+删除一条用户信息
+    open browser    http://192.168.5.222:901    ie
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    sleep    1
+    click element    Xpath = //*[@href="/Admin/UserList"]    #打开用户管理页面
+    sleep    1
+    查询出用户并删除    杨梅树
+
+随机产生一个电话号码
+    ${phone}    evaluate    random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8)) \ \ \    random
+    log    ${phone}
+
+采购申请（下拉框选择）
+    open browser    http://192.168.5.222:901    ie
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    sleep    1
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[20]/td/div/span
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[21]/td/div/a
+    sleep    1
+    selectFrame    //*[@id="mainTabStrip_fnode47"]/div/iframe
+    sleep    1
+    click element    //*[@id="btnAdd"]
+    unselectFrame
+    sleep    2
+    selectFrame    //*[@id="fineui_9"]/div[2]/iframe
+    input text    //*[@id="Makers-inputEl"]    123
+    click element    //*[@id="PurchaseType_ID-inputEl"]
+    sleep    1
+    click element    Xpath = /html/body/ul[1]/li[3]
+
+下拉框选择press
+    open browser    http://192.168.5.222:901    ie
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    sleep    1
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[20]/td/div/span
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[21]/td/div/a
+    sleep    1
+    selectFrame    //*[@id="mainTabStrip_fnode47"]/div/iframe
+    sleep    1
+    click element    //*[@id="btnAdd"]
+    unselectFrame
+    sleep    2
+    selectFrame    //*[@id="fineui_9"]/div[2]/iframe
+    input text    //*[@id="Makers-inputEl"]    777
+    press key    //*[@id="PurchaseType_ID-inputEl"]    \ue015    #选择下拉框，鼠标向下选择
+    press key    //*[@id="PurchaseType_ID-inputEl"]    \ue015    #鼠标向下选择
+    press key    //*[@id="PurchaseType_ID-inputEl"]    \\13    #enter确认选择
+
+日历表时间控件click操作
+    open browser    http://192.168.5.222:901    ie
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    sleep    1
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[20]/td/div/span
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[21]/td/div/a
+    sleep    1
+    selectFrame    //*[@id="mainTabStrip_fnode47"]/div/iframe
+    sleep    1
+    click element    //*[@id="btnAdd"]
+    unselectFrame
+    sleep    2
+    selectFrame    //*[@id="fineui_9"]/div[2]/iframe
+    click element    //*[@id="DeliveryTime-inputEl"]    #直接点击时间选择下拉框
+    click element    //*[@id="fineui_1"]/div[2]/table/tbody/tr[3]/td[4]/a    #直接点击选择控件里的时间
+
+日历表时间控件js操作
+    open browser    http://192.168.5.222:901    chrome
+    maximize browser window
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    click element    css=#btnSubmit
+    sleep    1
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[20]/td/div/span
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[21]/td/div/a
+    sleep    1
+    selectFrame    //*[@id="mainTabStrip_fnode47"]/div/iframe
+    sleep    1
+    click element    //*[@id="btnAdd"]
+    unselectFrame
+    sleep    2
+    selectFrame    //*[@id="fineui_9"]/div[2]/iframe
+    click element    //*[@id="DeliveryTime-inputEl"]    #选择时间控件
+    assign id to element    //*[@id="DeliveryTime-inputEl"]    time    #设置控件别名
+    execute javascript    window.document.getElementById('time').value='2017-08-15'    \    #js方式写入时间
+    click element    //*[@id="AddDetail"]
+
+JTabbedPanel选择
+    登陆
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[24]/td/div/span
+    click element    //*[@id="treeMenu"]/div/table/tbody/tr[44]/td/div/a
+    sleep    2
+    selectFrame    //*[@id="mainTabStrip_fnode94"]/div/iframe
+    click element    //*[@id="TabStrip1"]/div[1]/div[1]/div[3]/a[1]    #选择资产采购明细
+    click element    //*[@id="ddlSearchType-inputEl"]    #选择下拉框查询
+    presskey    //*[@id="ddlSearchType-inputEl"]    \ue015
+    presskey    //*[@id="ddlSearchType-inputEl"]    \ue015
+    presskey    //*[@id="ddlSearchType-inputEl"]    \ue015
+    presskey    //*[@id="ddlSearchType-inputEl"]    \\13
+    sleep    2
+    click element    //*[@id="TabStrip1"]/div[1]/div[1]/div[3]/a[2]/div[1]/div    #选择资产资产类型统计
+    sleep    1
+    close browser
+
+cookie跳过验证码
+    open browser    http://192.168.5.222:903    chrome
+    maximize browser window
+    sleep    2
+    add cookie    fmes_loginuserkey_2016    0A19E02F2824E19F009D01F516B71E5E86E99C27E4087F6FF0FCF6393E9625C169708F64C6CB0FA3C289EB3F646A967D1C726C4C17EB0FA89E088A431FF1E6E8AED6BADDDA4FBC5557AB09BCEB664F9C89F1B8537D3206EA92EFE210D8F3CA4B3360196644C1B62A331E9FD1EA65C7DF5C39D3A8F49F17106048A836DA54E89B6F9F45D0B972A632E06E292D43B9110DFAABFA3DD80FD1BAF866A585E67B825B9109F61FCB4BA719852A17509009AACAA7E278C0298AF2529F4780E478064751807BC997F60DBF0F732194B5BA58FBFA3FA713F5AF349489C965411F31B2EE420F88D1D67F583AED257F61BBFD0B4F296D071174139E1BA745C9A2C638CA5A95E614B34988DB1190C170628CDA77035269986CEC76978C94102EFA5319C42A2A722DE8D8D541702F527AC1D1F9BEC953040B1C3773D50C00B5984D28CBE322D39F20AC66F6ABDB12DB9AEEC5F0E033CAE2E655ED41C0FA2C5C5E7EBC4A8B299DDA276035B21DFB820E4D97F4FE77DDDAE0B740ECC6ED1CE95B9250AE94323C9C941FBCD275C1F062896D1C20160A70F8739CF4BA0ED06CFC3B80602F707558731DAEC9EF1A00477D3029131A39028034CF0B390FF3D92ED7
+    ${ww}    get cookies
+    log    ${ww}
+    goto    http://192.168.5.222:903/Home/Index
+
+*** Keywords ***
+循环
+    [Arguments]    ${number}
+    : FOR    ${i}    IN RANGE    ${number}
+    \    log    ${i}
+
+用户信息参数
+    [Arguments]    ${1}    ${2}    ${3}    ${4}    ${5}    ${6}
+    ...    ${7}    ${8}
+    input text    //*[@id="Name-inputEl"]    ${1}
+    input text    //*[@id="ChineseName-inputEl"]    ${2}
+    click element    ${3}    #选择性别
+    click element    //*[@id="Enabled"]/div[2]/div/label
+    input text    //*[@id="Password-inputEl"]    ${4}
+    input text    //*[@id="Email-inputEl"]    ${5}
+    input text    //*[@id="CompanyEmail-inputEl"]    ${6}
+    input text    //*[@id="OfficePhone-inputEl"]    ${7}
+    input text    //*[@id="Remark-inputEl"]    ${8}
+
+查询出用户并删除
+    [Arguments]    ${id}
+    selectFrame    //*[@id="mainTabStrip_fnode1"]/div/iframe
+    input text    //*[@id="ttbSearchMessage-inputEl"]    ${id}
+    click element    //*[@id="ttbSearchMessage"]/div[2]/div/div/i[2]
+    sleep    1
+    click element    //*[@id="Grid1"]/div[2]/div/div[2]/table/tbody/tr/td[1]/div
+    click element    //*[@id="btnDeleteSelected"]
+    unselectFrame    #是否为同一frame，什么时候进入/跳出是需要相当注意的
+    sleep    1
+    click element    //*[@id="fineui_14"]/span/span[text()='确定']
+
+登陆
+    open browser    http://192.168.5.222:901    ie
+    maximize browser window    #关键词之间多一个空格都不行！注意
+    sleep    1
+    input text    //*[@id="tbxUserName-inputEl"]    admin
+    input text    //*[@id="tbxPassword-inputEl"]    admin
+    sleep    1
+    click element    css=#btnSubmit
+    sleep    2

@@ -1,0 +1,10 @@
+--outputdir
+c:\users\administrator\appdata\local\temp\RIDE_gzzyl.d
+--monitorcolors
+off
+--monitorwidth
+95
+--suite
+开户业务
+--test
+开户业务.批量USIM卡开户

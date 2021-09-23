@@ -1,0 +1,10 @@
+--outputdir
+c:\users\administrator\appdata\local\temp\RIDEbure7r.d
+--monitorcolors
+off
+--monitorwidth
+95
+--suite
+开户业务
+--test
+开户业务.商品订购
